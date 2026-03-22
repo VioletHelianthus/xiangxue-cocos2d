@@ -1,0 +1,20 @@
+{
+  "designResolution": {
+    "width": 640,
+    "height": 960
+  },
+  "presets": [
+    { "label": "640×960", "width": 640, "height": 960 },
+    { "label": "750×1334 (iPhone 6/7/8)", "width": 750, "height": 1334 },
+    { "label": "1080×1920 (FHD)", "width": 1080, "height": 1920 },
+    { "label": "1080×2340 (Android)", "width": 1080, "height": 2340 },
+    { "label": "1170×2532 (iPhone 13)", "width": 1170, "height": 2532 },
+    { "label": "1284×2778 (iPhone 13 Pro Max)", "width": 1284, "height": 2778 },
+    { "label": "960×640", "width": 960, "height": 640 },
+    { "label": "1334×750", "width": 1334, "height": 750 },
+    { "label": "1920×1080 (FHD)", "width": 1920, "height": 1080 },
+    { "label": "2560×1440 (2K)", "width": 2560, "height": 1440 },
+    { "label": "2048×1536 (iPad)", "width": 2048, "height": 1536 },
+    { "label": "2732×2048 (iPad Pro)", "width": 2732, "height": 2048 }
+  ]
+}

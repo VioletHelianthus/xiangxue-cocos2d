@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body>
+<!-- RPG Character Screen - Pure HTML+CSS -->
+<div data-name="root" style="width:640px;height:960px;display:flex;flex-direction:column">
+
+  <!-- Top Navigation Bar -->
+  <div data-name="topNav" style="width:640px;height:60px;display:flex;flex-direction:row;align-items:center;gap:4px;padding:0 10px">
+    <button data-name="tabChar" style="flex-grow:1;height:44px" data-pressed="buttonLong_beige_pressed.png">Character</button>
+    <button data-name="tabInv" style="flex-grow:1;height:44px" data-pressed="buttonLong_beige_pressed.png">Inventory</button>
+    <button data-name="tabSkill" style="flex-grow:1;height:44px" data-pressed="buttonLong_beige_pressed.png">Skills</button>
+    <button data-name="tabQuest" style="flex-grow:1;height:44px" data-pressed="buttonLong_beige_pressed.png">Quests</button>
+  </div>
+
+  <!-- Main Content Area -->
+  <div data-name="mainContent" style="flex-grow:1;display:flex;flex-direction:column;padding:10px;gap:12px">
+
+    <!-- Character Info Header -->
+    <div data-name="charHeader" style="width:620px;height:120px;display:flex;flex-direction:row;gap:16px;align-items:center">
+      <!-- Avatar -->
+      <img data-name="avatar" src="ui-pack-rpg/PNG/iconCircle_grey.png" style="width:100px;height:100px"/>
+      <!-- Name & Level -->
+      <div data-name="charInfo" style="flex-grow:1;display:flex;flex-direction:column;gap:6px">
+        <span data-name="charName" style="width:200px;height:30px">DarkKnight_42</span>
+        <span data-name="charClass" style="width:200px;height:22px">Shadow Warrior Lv.58</span>
+        <!-- EXP Bar -->
+        <div data-name="expSection" style="display:flex;flex-direction:row;align-items:center;gap:8px">
+          <span data-name="expLabel" style="width:36px;height:20px">EXP</span>
+          <div data-widget="ProgressBar" data-name="expBar" data-value="72" data-max="100" style="width:180px;height:18px"
+                    src="ui-pack-rpg/PNG/barBack_horizontalMid.png"></div>
+          <span data-name="expText" style="width:80px;height:18px">7,250 / 10,000</span>
+        </div>
+      </div>
+      <!-- Gold Display -->
+      <div data-name="goldBox" style="display:flex;flex-direction:row;align-items:center;gap:4px">
+        <img data-name="goldIcon" src="ui-pack-rpg/PNG/dotYellow.png" style="width:24px;height:24px"/>
+        <span data-name="goldText" style="width:80px;height:22px">125,430</span>
+      </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div data-name="statsPanel" style="width:620px;display:flex;flex-direction:column;gap:8px;padding:8px"
+         data-anchor="0.5,0">
+      <span data-name="statsTitle" style="height:26px">Combat Stats</span>
+
+      <!-- HP Row -->
+      <div data-name="hpRow" style="display:flex;flex-direction:row;align-items:center;gap:8px;height:24px">
+        <span data-name="hpLabel" style="width:36px;height:20px">HP</span>
+        <div data-widget="ProgressBar" data-name="hpBar" data-value="85" data-max="100" style="width:200px;height:18px"
+                  src="ui-pack-rpg/PNG/barGreen_horizontalMid.png"></div>
+        <span data-name="hpVal" style="width:100px;height:18px">4,250 / 5,000</span>
+      </div>
+
+      <!-- MP Row -->
+      <div data-name="mpRow" style="display:flex;flex-direction:row;align-items:center;gap:8px;height:24px">
+        <span data-name="mpLabel" style="width:36px;height:20px">MP</span>
+        <div data-widget="ProgressBar" data-name="mpBar" data-value="63" data-max="100" style="width:200px;height:18px"
+                  src="ui-pack-rpg/PNG/barBlue_horizontalMid.png"></div>
+        <span data-name="mpVal" style="width:100px;height:18px">1,260 / 2,000</span>
+      </div>
+
+      <!-- STR/DEX/INT/VIT in 2x2 grid -->
+      <div data-name="statGrid" style="display:flex;flex-direction:column;gap:6px">
+        <div data-name="statRow1" style="display:flex;flex-direction:row;gap:20px">
+          <div data-name="strStat" style="display:flex;flex-direction:row;gap:4px;align-items:center">
+            <span data-name="strLabel" style="width:36px;height:20px">STR</span>
+            <div data-widget="ProgressBar" data-name="strBar" data-value="78" data-max="100" style="width:120px;height:14px"
+                      src="ui-pack-rpg/PNG/barRed_horizontalMid.png"></div>
+            <span data-name="strVal" style="width:32px;height:18px">78</span>
+          </div>
+          <div data-name="dexStat" style="display:flex;flex-direction:row;gap:4px;align-items:center">
+            <span data-name="dexLabel" style="width:36px;height:20px">DEX</span>
+            <div data-widget="ProgressBar" data-name="dexBar" data-value="65" data-max="100" style="width:120px;height:14px"
+                      src="ui-pack-rpg/PNG/barGreen_horizontalMid.png"></div>
+            <span data-name="dexVal" style="width:32px;height:18px">65</span>
+          </div>
+        </div>
+        <div data-name="statRow2" style="display:flex;flex-direction:row;gap:20px">
+          <div data-name="intStat" style="display:flex;flex-direction:row;gap:4px;align-items:center">
+            <span data-name="intLabel" style="width:36px;height:20px">INT</span>
+            <div data-widget="ProgressBar" data-name="intBar" data-value="42" data-max="100" style="width:120px;height:14px"
+                      src="ui-pack-rpg/PNG/barBlue_horizontalMid.png"></div>
+            <span data-name="intVal" style="width:32px;height:18px">42</span>
+          </div>
+          <div data-name="vitStat" style="display:flex;flex-direction:row;gap:4px;align-items:center">
+            <span data-name="vitLabel" style="width:36px;height:20px">VIT</span>
+            <div data-widget="ProgressBar" data-name="vitBar" data-value="91" data-max="100" style="width:120px;height:14px"
+                      src="ui-pack-rpg/PNG/barYellow_horizontalMid.png"></div>
+            <span data-name="vitVal" style="width:32px;height:18px">91</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inventory Grid (scrollable) -->
+    <div data-name="inventoryPanel" style="flex-grow:1;display:flex;flex-direction:column;gap:6px">
+      <span data-name="invTitle" style="height:26px">Inventory (24/40)</span>
+      <div data-name="invScroll" style="flex-grow:1;overflow:scroll">
+        <div data-name="invGrid" style="display:flex;flex-direction:column;gap:6px;padding:4px">
+          <!-- Row 1 -->
+          <div data-name="invRow1" style="display:flex;flex-direction:row;gap:6px">
+            <div data-name="slot_0" style="width:68px;height:68px">
+              <img data-name="item_0" src="ui-pack-rpg/PNG/swordBronze.png" style="width:56px;height:56px"/>
+            </div>
+            <div data-name="slot_1" style="width:68px;height:68px">
+              <img data-name="item_1" src="ui-pack-rpg/PNG/shieldBronze.png" style="width:56px;height:56px"/>
+            </div>
+            <div data-name="slot_2" style="width:68px;height:68px">
+              <img data-name="item_2" src="ui-pack-rpg/PNG/swordGold.png" style="width:56px;height:56px"/>
+            </div>
+            <div data-name="slot_3" style="width:68px;height:68px">
+              <img data-name="item_3" src="ui-pack-rpg/PNG/gemRed.png" style="width:56px;height:56px"/>
+            </div>
+            <div data-name="slot_4" style="width:68px;height:68px">
+              <img data-name="item_4" src="ui-pack-rpg/PNG/gemGreen.png" style="width:56px;height:56px"/>
+            </div>
+            <div data-name="slot_5" style="width:68px;height:68px">
+              <img data-name="item_5" src="ui-pack-rpg/PNG/gemBlue.png" style="width:56px;height:56px"/>
+            </div>
+            <div data-name="slot_6" style="width:68px;height:68px"></div>
+            <div data-name="slot_7" style="width:68px;height:68px"></div>
+          </div>
+          <!-- Row 2 -->
+          <div data-name="invRow2" style="display:flex;flex-direction:row;gap:6px">
+            <div data-name="slot_8" style="width:68px;height:68px">
+              <img data-name="item_8" src="ui-pack-rpg/PNG/swordSilver.png" style="width:56px;height:56px"/>
+            </div>
+            <div data-name="slot_9" style="width:68px;height:68px">
+              <img data-name="item_9" src="ui-pack-rpg/PNG/shieldGold.png" style="width:56px;height:56px"/>
+            </div>
+            <div data-name="slot_10" style="width:68px;height:68px"></div>
+            <div data-name="slot_11" style="width:68px;height:68px"></div>
+            <div data-name="slot_12" style="width:68px;height:68px"></div>
+            <div data-name="slot_13" style="width:68px;height:68px"></div>
+            <div data-name="slot_14" style="width:68px;height:68px"></div>
+            <div data-name="slot_15" style="width:68px;height:68px"></div>
+          </div>
+          <!-- Row 3 -->
+          <div data-name="invRow3" style="display:flex;flex-direction:row;gap:6px">
+            <div data-name="slot_16" style="width:68px;height:68px"></div>
+            <div data-name="slot_17" style="width:68px;height:68px"></div>
+            <div data-name="slot_18" style="width:68px;height:68px"></div>
+            <div data-name="slot_19" style="width:68px;height:68px"></div>
+            <div data-name="slot_20" style="width:68px;height:68px"></div>
+            <div data-name="slot_21" style="width:68px;height:68px"></div>
+            <div data-name="slot_22" style="width:68px;height:68px"></div>
+            <div data-name="slot_23" style="width:68px;height:68px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Action Bar -->
+  <div data-name="bottomBar" style="width:640px;height:64px;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:16px;padding:0 20px">
+    <button data-name="btnEquip" style="width:140px;height:48px"
+            src="ui-pack-rpg/PNG/buttonLong_blue.png"
+            data-pressed="ui-pack-rpg/PNG/buttonLong_blue_pressed.png">Equip</button>
+    <button data-name="btnUse" style="width:140px;height:48px"
+            src="ui-pack-rpg/PNG/buttonLong_grey.png"
+            data-pressed="ui-pack-rpg/PNG/buttonLong_grey_pressed.png">Use</button>
+    <button data-name="btnDrop" style="width:140px;height:48px"
+            src="ui-pack-rpg/PNG/buttonLong_brown.png"
+            data-pressed="ui-pack-rpg/PNG/buttonLong_brown_pressed.png">Drop</button>
+  </div>
+
+</div>
+</body>
+</html>
