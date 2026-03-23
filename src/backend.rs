@@ -256,27 +256,41 @@ impl CocosBackend {
             })
         };
 
+        // ── AnchorPoint (compute first, needed for Position) ──
+        let (anchor_x, anchor_y) = if is_root {
+            (
+                layout.anchor_x.unwrap_or(0.0),
+                layout.anchor_y.map(flip_anchor_y).unwrap_or(0.0),
+            )
+        } else {
+            (
+                layout.anchor_x.unwrap_or(0.5),
+                layout.anchor_y.map(flip_anchor_y).unwrap_or(0.5),
+            )
+        };
+
         // ── Position (prefer resolved values, then fallback to manual) ──
+        // cocos_x/cocos_y = bottom-left corner, then offset by anchor to get anchor-point position
         let (cocos_x, cocos_y) = if layout.resolved_x.is_some() || layout.resolved_y.is_some() {
-            // Taffy resolved: always Y-flip since resolved_y is a real CSS-space coordinate
             let css_x = layout.resolved_x.unwrap_or(0.0);
             let css_y = layout.resolved_y.unwrap_or(0.0);
-            (css_x, css_top_to_cocos_y(css_y, parent_h, node_h))
+            let bl_x = css_x;
+            let bl_y = css_top_to_cocos_y(css_y, parent_h, node_h);
+            (bl_x + anchor_x * node_w, bl_y + anchor_y * node_h)
         } else {
-            // Fallback: manual resolution (no resolve_layout called)
             let margin_left = layout.margin_left.unwrap_or(0.0);
             let margin_top = layout.margin_top.unwrap_or(0.0);
-            let pos_x = layout.left.as_ref()
+            let bl_x = layout.left.as_ref()
                 .map(|d| resolve_dimension(d, parent_w) + margin_left)
                 .unwrap_or(0.0);
-            let cocos_y = match layout.top.as_ref() {
+            let bl_y = match layout.top.as_ref() {
                 Some(d) => {
                     let css_top = resolve_dimension(d, parent_h) + margin_top;
                     css_top_to_cocos_y(css_top, parent_h, node_h)
                 }
                 None => 0.0,
             };
-            (pos_x, cocos_y)
+            (bl_x + anchor_x * node_w, bl_y + anchor_y * node_h)
         };
 
         let pos_x_str = fmt4(cocos_x);
@@ -290,18 +304,7 @@ impl CocosBackend {
         let sy_str = fmt4(sy);
         w.self_closing_tag("Scale", &[("ScaleX", &sx_str), ("ScaleY", &sy_str)]);
 
-        // ── AnchorPoint ──
-        let (anchor_x, anchor_y) = if is_root {
-            (
-                layout.anchor_x.unwrap_or(0.0),
-                layout.anchor_y.map(flip_anchor_y).unwrap_or(0.0),
-            )
-        } else {
-            (
-                layout.anchor_x.unwrap_or(0.5),
-                layout.anchor_y.map(flip_anchor_y).unwrap_or(0.5),
-            )
-        };
+        // ── AnchorPoint (output) ──
         let ax_str = fmt4(anchor_x);
         let ay_str = fmt4(anchor_y);
         w.self_closing_tag("AnchorPoint", &[("ScaleX", &ax_str), ("ScaleY", &ay_str)]);
@@ -851,8 +854,9 @@ mod tests {
         root.children.push(child);
         let backend = CocosBackend::default();
         let xml = backend.emit_document(&root);
-        // Position X = 100, Position Y = 960 - 50 - 60 = 850
-        assert!(xml.contains("<Position X=\"100.0000\" Y=\"850.0000\"/>"));
+        // Bottom-left: (100, 960-50-60) = (100, 850)
+        // With default anchor (0.5, 0.5): (100+0.5*200, 850+0.5*60) = (200, 880)
+        assert!(xml.contains("<Position X=\"200.0000\" Y=\"880.0000\"/>"));
     }
 
     #[test]

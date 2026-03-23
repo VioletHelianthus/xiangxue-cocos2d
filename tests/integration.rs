@@ -54,11 +54,13 @@ fn flex_layout_csd_positions() {
     let header_section = csd.find("Name=\"header\"").unwrap();
     let header_xml = &csd[header_section..];
     assert!(header_xml.contains("Size X=\"640.0000\" Y=\"80.0000\""));
-    assert!(header_xml.contains("Position X=\"0.0000\" Y=\"880.0000\""));
+    // With anchor (0.5, 0.5): (0+320, 880+40) = (320, 920)
+    assert!(header_xml.contains("Position X=\"320.0000\" Y=\"920.0000\""));
 
     let right_section = csd.find("Name=\"right\"").unwrap();
     let right_xml = &csd[right_section..];
-    assert!(right_xml.contains("Position X=\"320.0000\""));
+    // With anchor (0.5, 0.5): (320+160, 0+40) = (480, 40)
+    assert!(right_xml.contains("Position X=\"480.0000\""));
     assert!(right_xml.contains("Size X=\"320.0000\" Y=\"80.0000\""));
 }
 
